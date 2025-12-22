@@ -84,7 +84,7 @@ def go(deck, discard, player):
 
 
 while deck != []:
-    # take turns
+    # take turns yes
     for p, player in enumerate(players):
         print(f'Player {p} start')
         print(player['hand'])
