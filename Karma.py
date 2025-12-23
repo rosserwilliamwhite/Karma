@@ -63,7 +63,7 @@ def go(deck, discard, player):
         else:
             # pick up
             player['hand'] += discard
-            discard = []
+            discard.clear()
             return
 
     # if a quad discard and go again
@@ -93,3 +93,5 @@ while deck != []:
         print(discard)
         print(f'Player {p} end')
         print(player['hand'])
+        
+
