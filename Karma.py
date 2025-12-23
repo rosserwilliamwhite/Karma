@@ -20,28 +20,7 @@ import sys
 # put down randomly
 
 
-card_map = [2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A', 10]
-card_index = { val: i for i, val in enumerate(card_map)}
 
-
-deck = list(range(0,13)) * 4 # repeat 0-12 4 times
-random.shuffle(deck)
-old_deck = deck
-
-p1 = deck[0:9]
-p2 = deck[9:18]
-deck = deck[18:]
-discard = []
-
-# initialise hands
-players = [p1, p2]
-for i, player in enumerate(players):
-    known = player[0:6]; known.sort()
-    unknown = player[6:9]
-    player = {'hand': known[0:3], 'known': known[3:6], 'unknown': unknown}
-    players[i] = player
-
-# someone goes first
 
 
 
@@ -51,13 +30,14 @@ def go(deck, discard, player):
     inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
     
     if not inplay:
-        print('Won')
-        sys.exit()
+        return 1
 
 
     if discard == []:
-        discard.append(inplay[0])
-        inplay.pop(0)
+        lowest = inplay[0]
+        indices = [i for i, card in enumerate(inplay) if card == lowest]
+        discard += inplay[indices[0]:indices[-1]+1]
+        del inplay[indices[0]:indices[-1]+1]
     else:
         greater = [i for i, card in enumerate(inplay) if card >= discard[-1]]
         # try hand
@@ -85,10 +65,9 @@ def go(deck, discard, player):
                 player['hand'] += discard
                 discard.clear()
                 player['hand'].sort()
-                return
+                return 0
         else:
-            print('won')
-            sys.exit()
+            return 1
 
         # check for fail
         if fail:
@@ -101,11 +80,11 @@ def go(deck, discard, player):
                 player['hand'] += discard
                 discard.clear()
                 player['hand'].sort()
-                return
+                return 0
 
     # if a quad discard and go again
     if len(discard) > 3:
-        if discard[-4:] == discard[-1] * 4:
+        if discard[-4:] == [discard[-1]] * 4:
             discard.clear()
             go(deck, discard, player)
 
@@ -119,15 +98,50 @@ def go(deck, discard, player):
         player['hand'].append(deck.pop(0))
 
     player['hand'].sort()
+    return 0
 
-turn = 0
-while turn < 1000:
-    # take turns
-    for p, player in enumerate(players):
-        print(f'Player {p}') 
-        print(f'Hand: {player['hand']} Known: {player['known']}')
-        go(deck, discard, player)
-        print('Discard:')
-        print(discard)
+
+
+card_map = [2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A', 10]
+card_index = { val: i for i, val in enumerate(card_map)}
+
+
+
+
+# someone goes first
+wins = []
+for k in range(10):
+    deck = list(range(0,13)) * 4 # repeat 0-12 4 times
+    random.shuffle(deck)
+    old_deck = deck
+
+    p1 = deck[0:9]
+    p2 = deck[9:18]
+    deck = deck[18:]
+    discard = []
+
+    # initialise hands
+    players = [p1, p2]
+    for i, player in enumerate(players):
+        known = player[0:6]; known.sort()
+        unknown = player[6:9]
+        player = {'hand': known[0:3], 'known': known[3:6], 'unknown': unknown}
+        players[i] = player
+        
+    turn = 0
+    win = 0
+    p = 0
+    while turn < 1000 and not win:
+        player = players[p]
+        # take turns
+        # print(f'Player {p}') 
+        # print(f'Hand: {player['hand']} Known: {player['known']}')
+        win = go(deck, discard, player)
+        if win:
+            print(f'player {p} won')
+            wins.append(p)
+        # print('Discard:')
+        # print(discard)
         turn += 1
-
+        p = 0 if p else 1
+print(wins)
