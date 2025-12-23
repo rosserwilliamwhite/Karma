@@ -93,6 +93,3 @@ while deck != []:
         print(discard)
         print(f'Player {p} end')
         print(player['hand'])
-        
-
-
