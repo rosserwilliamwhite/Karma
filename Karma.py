@@ -1,5 +1,6 @@
 # Pure python?
 import random
+import sys
 
 # Initialise
 # Organise cards
@@ -42,56 +43,91 @@ for i, player in enumerate(players):
 
 # someone goes first
 
+
+
 def go(deck, discard, player):
+    # always
+    fail = 0
+    inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
     
+    if not inplay:
+        print('Won')
+        sys.exit()
+
+
     if discard == []:
-        discard.append(player['hand'][0])
-        player['hand'].pop(0)
+        discard.append(inplay[0])
+        inplay.pop(0)
     else:
-        # find the index of the first number that is greater than the last in deck
-        greater = [i for i, card in enumerate(player['hand']) if card >= discard[-1]]
-        if greater != []:
-            # put down the lowest card
-            lowest = player['hand'][greater[0]]
-            indices = [i for i, card in enumerate(player['hand']) if card == lowest]
-            discard += player['hand'][indices[0]:indices[-1]+1]
-            del player['hand'][indices[0]:indices[-1]+1]
-        elif card_index[2] in player['hand']:
-            # play a 2 
-            discard.append(card_index[2])
-            player['hand'].remove(card_index[2])
+        greater = [i for i, card in enumerate(inplay) if card >= discard[-1]]
+        # try hand
+        if player['hand']: 
+            if greater: 
+                lowest = player['hand'][greater[0]]
+                indices = [i for i, card in enumerate(player['hand']) if card == lowest]
+                discard += player['hand'][indices[0]:indices[-1]+1]
+                del player['hand'][indices[0]:indices[-1]+1]
+            else:
+                fail = 1
+        # try known
+        elif player['known']:
+            if greater:
+                lowest = player['known'][greater[0]]
+                index = player['known'].index(lowest)
+                discard.append(player['known'][index])
+                del player['known'][index]
+            else:
+                fail = 1
+        elif player['unknown']:
+            discard.append(player['unknown'].pop(0))
+            # check for fail
+            if discard[-2] > discard[-1]:
+                player['hand'] += discard
+                discard.clear()
+                player['hand'].sort()
+                return
         else:
+            print('won')
+            sys.exit()
+
+        # check for fail
+        if fail:
+            # try play a 2 
+            if card_index[2] in player['hand']:
+                discard.append(card_index[2])
+                player['hand'].remove(card_index[2])
             # pick up
-            player['hand'] += discard
-            discard.clear()
-            return
+            else:
+                player['hand'] += discard
+                discard.clear()
+                player['hand'].sort()
+                return
 
     # if a quad discard and go again
     if len(discard) > 3:
         if discard[-4:] == discard[-1] * 4:
             discard.clear()
             go(deck, discard, player)
+
     # if a ten clear discard and go again
     if discard[-1] == card_index[10]:
         discard.clear()
         go(deck, discard, player)
-    # if unsucessful play, pick up
+
     # fill cards otherwise
     while len(player['hand']) < 3 and deck != []:
-        player['hand'].append(deck[0])
-        deck.pop(0)
+        player['hand'].append(deck.pop(0))
+
     player['hand'].sort()
 
-
-while deck != []:
+turn = 0
+while turn < 1000:
     # take turns
     for p, player in enumerate(players):
-        print(f'Player {p} start')
-        print(player['hand'])
+        print(f'Player {p}') 
+        print(f'Hand: {player['hand']} Known: {player['known']}')
         go(deck, discard, player)
         print('Discard:')
         print(discard)
-        print(f'Player {p} end')
-        print(player['hand'])
-        
+        turn += 1
 
