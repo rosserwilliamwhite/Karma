@@ -69,11 +69,11 @@ def go(deck, discard, player):
     # if a quad discard and go again
     if len(discard) > 3:
         if discard[-4:] == discard[-1] * 4:
-            discard = []
+            discard.clear()
             go(deck, discard, player)
     # if a ten clear discard and go again
     if discard[-1] == card_index[10]:
-        discard = []
+        discard.clear()
         go(deck, discard, player)
     # if unsucessful play, pick up
     # fill cards otherwise
