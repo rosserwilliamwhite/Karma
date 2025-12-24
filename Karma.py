@@ -135,6 +135,7 @@ card_index = { val: i for i, val in enumerate(card_map)}
 # someone goes first
 wins = []
 for k in range(100):
+    print('New Game:')
     deck = list(range(0,13)) * 4 # repeat 0-12 4 times
     random.shuffle(deck)
     old_deck = deck
@@ -162,10 +163,10 @@ for k in range(100):
         print(f'Hand: {player['hand']} Known: {player['known']}')
         win = go(deck, discard, player)
         if win:
-            print(f'player {p} won')
+            # print(f'player {p} won')
             wins.append(p)
         print('Discard:')
         print(discard)
         turn += 1
         p = 0 if p else 1
-print(wins)
+print(f'Player 0 won {wins.count(0)/len(wins)*100:.2f}% of the time')
