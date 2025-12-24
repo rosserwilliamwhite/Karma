@@ -27,6 +27,12 @@ import sys
 def go(deck, discard, player):
     # always
     fail = 0
+    # fill cards otherwise
+    while len(player['hand']) < 3 and deck != []:
+        player['hand'].append(deck.pop(0))
+
+    player['hand'].sort()
+
     inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
     
     if not inplay:
@@ -82,22 +88,29 @@ def go(deck, discard, player):
                 player['hand'].sort()
                 return 0
 
+    
+
     # if a quad discard and go again
     if len(discard) > 3:
         if discard[-4:] == [discard[-1]] * 4:
             discard.clear()
             go(deck, discard, player)
+            inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
+            if not inplay:
+                return 1
+
+    if not discard:
+        print('ruhroh')
+        print(players[0])
+        print(players[1])
+        1
 
     # if a ten clear discard and go again
     if discard[-1] == card_index[10]:
         discard.clear()
         go(deck, discard, player)
 
-    # fill cards otherwise
-    while len(player['hand']) < 3 and deck != []:
-        player['hand'].append(deck.pop(0))
-
-    player['hand'].sort()
+    
     return 0
 
 
@@ -110,7 +123,7 @@ card_index = { val: i for i, val in enumerate(card_map)}
 
 # someone goes first
 wins = []
-for k in range(10):
+for k in range(100):
     deck = list(range(0,13)) * 4 # repeat 0-12 4 times
     random.shuffle(deck)
     old_deck = deck
@@ -134,14 +147,14 @@ for k in range(10):
     while turn < 1000 and not win:
         player = players[p]
         # take turns
-        # print(f'Player {p}') 
-        # print(f'Hand: {player['hand']} Known: {player['known']}')
+        print(f'Player {p}') 
+        print(f'Hand: {player['hand']} Known: {player['known']}')
         win = go(deck, discard, player)
         if win:
             print(f'player {p} won')
             wins.append(p)
-        # print('Discard:')
-        # print(discard)
+        print('Discard:')
+        print(discard)
         turn += 1
         p = 0 if p else 1
 print(wins)
