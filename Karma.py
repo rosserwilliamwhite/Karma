@@ -27,12 +27,6 @@ import sys
 def go(deck, discard, player):
     # always
     fail = 0
-    # fill cards otherwise
-    while len(player['hand']) < 3 and deck != []:
-        player['hand'].append(deck.pop(0))
-
-    player['hand'].sort()
-
     inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
     
     if not inplay:
@@ -94,9 +88,13 @@ def go(deck, discard, player):
     if len(discard) > 3:
         if discard[-4:] == [discard[-1]] * 4:
             discard.clear()
-            go(deck, discard, player)
-            inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
-            if not inplay:
+            # fill cards otherwise
+            while len(player['hand']) < 3 and deck != []:
+                player['hand'].append(deck.pop(0))
+
+            player['hand'].sort()
+            win = go(deck, discard, player)
+            if win:
                 return 1
 
     if not discard:
@@ -108,7 +106,20 @@ def go(deck, discard, player):
     # if a ten clear discard and go again
     if discard[-1] == card_index[10]:
         discard.clear()
-        go(deck, discard, player)
+        # fill cards otherwise
+        while len(player['hand']) < 3 and deck != []:
+            player['hand'].append(deck.pop(0))
+
+        player['hand'].sort()
+        win = go(deck, discard, player)
+        if win:
+            return 1
+    
+    # fill cards otherwise
+    while len(player['hand']) < 3 and deck != []:
+        player['hand'].append(deck.pop(0))
+
+    player['hand'].sort()
 
     
     return 0
