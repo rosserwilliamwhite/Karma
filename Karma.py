@@ -170,3 +170,11 @@ for k in range(100):
         turn += 1
         p = 0 if p else 1
 print(f'Player 0 won {wins.count(0)/len(wins)*100:.2f}% of the time')
+
+# Choices on turn:
+# pick up
+# place card. Which card and how many
+# manual mode?
+
+# Game of shithead
+# 
