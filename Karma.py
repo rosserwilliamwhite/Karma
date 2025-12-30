@@ -1,30 +1,10 @@
 # Pure python?
 import random
-import sys
 
-# Initialise
-# Organise cards
+# add rigid structure that allows you to do anything but strictly punishes you
+# ai can choose start and stop in array
 
-# Always:
-# Quad or ten clear and go again
-# On turn place a card
-# Lower than previous, pick up
-
-# Phase 1
-# If successful turn and hand less than three pick up
-
-# Phase 2
-# put down from known hand
-
-# Phase 3
-# put down randomly
-
-
-
-
-
-
-def go(deck, discard, player):
+def go_bot(deck, discard, player):
     # always
     fail = 0
     inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown']
@@ -82,8 +62,6 @@ def go(deck, discard, player):
                 player['hand'].sort()
                 return 0
 
-    
-
     # if a quad discard and go again
     if len(discard) > 3:
         if discard[-4:] == [discard[-1]] * 4:
@@ -93,15 +71,9 @@ def go(deck, discard, player):
                 player['hand'].append(deck.pop(0))
 
             player['hand'].sort()
-            win = go(deck, discard, player)
+            win = go_bot(deck, discard, player)
             if win:
                 return 1
-
-    if not discard:
-        print('ruhroh')
-        print(players[0])
-        print(players[1])
-        1
 
     # if a ten clear discard and go again
     if discard[-1] == card_index[10]:
@@ -111,7 +83,7 @@ def go(deck, discard, player):
             player['hand'].append(deck.pop(0))
 
         player['hand'].sort()
-        win = go(deck, discard, player)
+        win = go_bot(deck, discard, player)
         if win:
             return 1
     
@@ -121,21 +93,10 @@ def go(deck, discard, player):
 
     player['hand'].sort()
 
-    
+    # sucessful but didn't win
     return 0
 
-
-
-card_map = [2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A', 10]
-card_index = { val: i for i, val in enumerate(card_map)}
-
-
-
-
-# someone goes first
-wins = []
-for k in range(100):
-    print('New Game:')
+def deal():
     deck = list(range(0,13)) * 4 # repeat 0-12 4 times
     random.shuffle(deck)
     old_deck = deck
@@ -143,8 +104,6 @@ for k in range(100):
     p1 = deck[0:9]
     p2 = deck[9:18]
     deck = deck[18:]
-    discard = []
-
     # initialise hands
     players = [p1, p2]
     for i, player in enumerate(players):
@@ -152,29 +111,34 @@ for k in range(100):
         unknown = player[6:9]
         player = {'hand': known[0:3], 'known': known[3:6], 'unknown': unknown}
         players[i] = player
-        
-    turn = 0
-    win = 0
-    p = 0
-    while turn < 1000 and not win:
-        player = players[p]
-        # take turns
-        print(f'Player {p}') 
-        print(f'Hand: {player['hand']} Known: {player['known']}')
-        win = go(deck, discard, player)
-        if win:
-            # print(f'player {p} won')
-            wins.append(p)
-        print('Discard:')
-        print(discard)
-        turn += 1
-        p = 0 if p else 1
-print(f'Player 0 won {wins.count(0)/len(wins)*100:.2f}% of the time')
+    return players, deck
 
-# Choices on turn:
-# pick up
-# place card. Which card and how many
-# manual mode?
+def botbot_game():
+    card_map = [2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A', 10]
+    global card_index
+    card_index = { val: i for i, val in enumerate(card_map)}
+    # someone goes first
+    wins = []
+    for k in range(100):
+        print('New Game:')
+        players, deck = deal()
+        discard = []
 
-# Game of shithead
-# 
+        turn = 0
+        win = 0
+        p = 0
+        while turn < 1000 and not win:
+            player = players[p]
+            # take turns
+            print(f'Player {p}') 
+            print(f'Hand: {player['hand']} Known: {player['known']}')
+            win = go_bot(deck, discard, player)
+            if win:
+                # print(f'player {p} won')
+                wins.append(p)
+            print('Discard:')
+            print(discard)
+            turn += 1
+            p = 0 if p else 1
+    print(f'Player 0 won {wins.count(0)/len(wins)*100:.2f}% of the time')
+
