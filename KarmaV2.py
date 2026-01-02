@@ -1,4 +1,5 @@
 import random
+import math
 # long numpy array to store previous cards, phase, hand
 # choose which cards to play out of hand
 
@@ -21,14 +22,37 @@ def deal():
     return players, draw
 
 # construct referee
-def referee(bi, draw, discard, players, who):
-    # enforce rules
-    return draw, discard, players
+def referee(who):
+    global discard
+    global players
+    # enforce rule
+    if discard[-1] > discard[-2]:
+        # player must pick up the discard
+        players[who]['hand'].append(discard)
+        discard = []
+        return 0
+    elif list(players[who].values()) == [[],[],[]]:
+        return 1
+    
+def go(who, bi):
+    player = players[who]
+    inplay = player['hand'] if player['hand'] else player['known'] if player['known'] else player['unknown'] 
+    # start, end maps 0 to 1 to 0 to len(inplay)
+    # take floor of decimal 
+    bind = [round(bi[0]*len(inplay)), round(bi[1]*len(inplay))]
+    discard.append(inplay[bind[0]:bind[1]]) if bind[0] != bind[1] else discard
+    
 
 # should just work by inputing start, stop
 
-# start game
-# give hand
-# player tries something based on hand
-# referee checks play and adjusts accordingly
-# win if player has no cards
+# start game (deal)
+players, draw = deal()
+discard = []
+# give hand (inplay)
+
+# player tries something based on hand (go)
+# referee checks play and adjusts accordingly (referee)
+# win if player has no cards (referee)
+
+print(players[0])
+go(0,[0,0.3])
