@@ -1,6 +1,7 @@
 import random
 
 class Player:
+    # TODO add bots and player
     def __init__(self):
         self.hand = self.known = self.unknown = []
         self.win = False
@@ -16,6 +17,7 @@ class Player:
         return tuple(bi_floated)
 
 class Karma:
+    # TODO initialise from list of player types
     def __init__(self, n_players: int = 2):
         self.pack = list(range(1, 14)) * 4
         random.shuffle(self.pack)  # repeat 0-12 4 times
@@ -98,6 +100,7 @@ class Karma:
         self.checkwin(player)
 
     def turn(self):
+        print(f"Player{self.whosturn} turn")
         player: Player = self.getplayer()
         bi = player.getbi(self.pile)
         self.play(player, bi)
