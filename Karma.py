@@ -10,7 +10,11 @@ def go_bot1(deck, discard, player):
     """Dummy bot, just plays the most of the lowest ranking card"""
     # always
     fail = 0
-    inplay = player["hand"] if player["hand"] else player["known"] if player["known"] else player["unknown"]
+    inplay = (
+        player["hand"]
+        if player["hand"]
+        else player["known"] if player["known"] else player["unknown"]
+    )
 
     if not inplay:
         return 1
@@ -100,7 +104,11 @@ def go_bot2(deck, discard, player):
     """Ensure that twos are played less often"""
     # always
     fail = 0
-    inplay = player["hand"] if player["hand"] else player["known"] if player["known"] else player["unknown"]
+    inplay = (
+        player["hand"]
+        if player["hand"]
+        else player["known"] if player["known"] else player["unknown"]
+    )
 
     if not inplay:
         return 1
@@ -207,7 +215,11 @@ def go_bot3(deck, discard, player):
 
     # always
     fail = 0
-    inplay = player["hand"] if player["hand"] else player["known"] if player["known"] else player["unknown"]
+    inplay = (
+        player["hand"]
+        if player["hand"]
+        else player["known"] if player["known"] else player["unknown"]
+    )
 
     if not inplay:
         return 1
