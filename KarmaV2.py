@@ -19,7 +19,9 @@ class Player:
 class Karma:
     # TODO initialise from list of player types
     def __init__(self, n_players: int = 2):
-        self.pack = list(range(1, 14)) * 4
+        two = 1
+        ten = two + 13
+        self.pack = list(range(two, ten)) * 4
         random.shuffle(self.pack)  # repeat 0-12 4 times
         self.draw = self.pack[n_players * 9 :]
         self.deal(n_players)
@@ -28,7 +30,7 @@ class Karma:
         self.win = False
 
         ranks = [2,3,4,5,6,7,8,9,'J','Q','K','A',10]
-        self.index = dict(zip(ranks, list(range(min(self.pack),max(self.pack)))))
+        self.index = dict(zip(ranks, list(range(two,ten))))
 
     def deal(self, n_players):
         self.players = []
