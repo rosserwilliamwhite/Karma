@@ -113,5 +113,6 @@ class Karma:
         while not self.win:
             self.turn()
 
-game = Karma()
-game.run()
+if __name__ == "__main__":
+    game = Karma()
+    game.run()
