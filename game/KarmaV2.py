@@ -1,4 +1,6 @@
 import random
+import logging
+logger = logging.getLogger(__name__)
 
 class Player:
     def __init__(self,  name: str):
@@ -61,9 +63,9 @@ class Player:
         return i
     
     def getbi(self, pile, inplay):
-        print(f"Pile: {[cmap[c] for c in pile]}")
+        logger.info(f"Pile: {[cmap[c] for c in pile]}")
         converted_hand = {k: [cmap[c] for c in v] for k, v in self.hand.items()}
-        print(converted_hand)
+        logger.info(converted_hand)
         if self.name == 'will':
             bi_list = input("Input bi separated by spaces: ").split()
             bi_floated = [int(num)-1 for num in bi_list]
@@ -142,18 +144,18 @@ class Karma:
     def checkwin(self, player: Player):
         if list(player.hand.values()) == [[],[],[]]:
             self.win = True
-            print(f"Player {self.whosturn} won!")
+            logger.info(f"Player {self.whosturn} won!")
 
     def referee(self, player: Player, bi: tuple) -> int:
         inplay = player.hand[player.hmap[player.phase]]
         # see what the player wants to do
         move = inplay[bi[0] : bi[1]+1]
         
-        print(f"Move: {[cmap[c] for c in move]}")
+        logger.info(f"Move: {[cmap[c] for c in move]}")
         
         # check its validity
         outcome = self.rulebook(move)
-        print(outcome)
+        logger.info(outcome)
         # do the control
         if outcome == "fail":
             del inplay[bi[0] : bi[1]+1]
@@ -173,7 +175,7 @@ class Karma:
     def turn(self):
         player: Player = self.getplayer()
         inplay = player.inplay()
-        print(f"Player{self.whosturn} turn (phase {player.phase})")
+        logger.info(f"Player{self.whosturn} turn (phase {player.phase})")
         bi = player.getbi(self.pile, inplay)
         self.referee(player, bi)
         
