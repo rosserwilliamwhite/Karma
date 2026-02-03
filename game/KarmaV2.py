@@ -85,6 +85,7 @@ class Karma:
         self.pile = []
         self.whosturn = 0
         self.win = False
+        self.data = {'pile':None,'phase':None,'inplay':None,'bi':None}
 
         global cmap, cmap_inv
         ranks = [3,4,5,6,7,8,9,'J','Q','K','A',2,10]
@@ -140,7 +141,6 @@ class Karma:
         self.whosturn += 1
         self.whosturn = self.whosturn % len(self.players)
 
-
     def checkwin(self, player: Player):
         if list(player.hand.values()) == [[],[],[]]:
             self.win = True
@@ -148,6 +148,10 @@ class Karma:
 
     def referee(self, player: Player, bi: tuple) -> int:
         inplay = player.hand[player.hmap[player.phase]]
+        self.data['phase'] = (player.phase,)
+        self.data['inplay'] = tuple(player.inplay())
+        self.data['pile'] = tuple(self.pile)
+        self.data['bi'] = bi
         # see what the player wants to do
         move = inplay[bi[0] : bi[1]+1]
         
@@ -178,7 +182,6 @@ class Karma:
         logger.info(f"Player{self.whosturn} turn (phase {player.phase})")
         bi = player.getbi(self.pile, inplay)
         self.referee(player, bi)
-        
 
     # Game control
     def run(self):
