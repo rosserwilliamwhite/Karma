@@ -1,0 +1,150 @@
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3]
+INFO:game.KarmaV2:{'private': [9, 'A', 'A'], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [9]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9]
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 7, 9, 9, 'J', 'K', 'K', 2, 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [9, 9]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9]
+INFO:game.KarmaV2:{'private': ['J', 'A', 'A'], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: ['J']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J']
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 7, 'J', 'K', 'K', 2, 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: ['J']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J']
+INFO:game.KarmaV2:{'private': ['A', 'A', 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: ['A', 'A']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A']
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 7, 'K', 'K', 2, 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [2]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2]
+INFO:game.KarmaV2:{'private': [7, 'A', 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [7]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7]
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 7, 'K', 'K', 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [7]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7]
+INFO:game.KarmaV2:{'private': ['Q', 'A', 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: ['Q']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q']
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 'K', 'K', 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: ['K']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K']
+INFO:game.KarmaV2:{'private': [8, 'A', 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: ['A']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A']
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 'K', 2], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [2]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2]
+INFO:game.KarmaV2:{'private': [4, 8, 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [4]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4]
+INFO:game.KarmaV2:{'private': [4, 4, 5, 5, 6, 6, 6, 'K'], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [4, 4]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4]
+INFO:game.KarmaV2:{'private': [5, 8, 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [5]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5]
+INFO:game.KarmaV2:{'private': [5, 5, 6, 6, 6, 'K'], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [5, 5]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5]
+INFO:game.KarmaV2:{'private': [8, 2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [8]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8]
+INFO:game.KarmaV2:{'private': [6, 6, 6, 'K'], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: ['K']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K']
+INFO:game.KarmaV2:{'private': [2], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [2]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 0)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2]
+INFO:game.KarmaV2:{'private': [6, 6, 6], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [6, 6, 6]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6]
+INFO:game.KarmaV2:{'private': [], 'public': [7, 8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [7]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7]
+INFO:game.KarmaV2:{'private': [], 'public': [7, 9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [7]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7]
+INFO:game.KarmaV2:{'private': [], 'public': [8, 'J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [8]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8]
+INFO:game.KarmaV2:{'private': [], 'public': [9, 2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [9]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9]
+INFO:game.KarmaV2:{'private': [], 'public': ['J'], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: ['J']
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 1)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9, 'J']
+INFO:game.KarmaV2:{'private': [], 'public': [2], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [2]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 2)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9, 'J', 2]
+INFO:game.KarmaV2:{'private': [], 'public': [], 'hidden': [9, 8, 10]}
+INFO:game.KarmaV2:Move: [9]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 2)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9, 'J', 2, 9]
+INFO:game.KarmaV2:{'private': [], 'public': [], 'hidden': [2, 4, 'A']}
+INFO:game.KarmaV2:Move: [2]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player0 turn (phase 2)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9, 'J', 2, 9, 2]
+INFO:game.KarmaV2:{'private': [], 'public': [], 'hidden': [8, 10]}
+INFO:game.KarmaV2:Move: [8]
+INFO:game.KarmaV2:success
+INFO:game.KarmaV2:Player1 turn (phase 2)
+INFO:game.KarmaV2:Pile: [3, 3, 3, 9, 9, 9, 'J', 'J', 'A', 'A', 2, 7, 7, 'Q', 'K', 'A', 2, 4, 4, 4, 5, 5, 5, 8, 'K', 2, 6, 6, 6, 7, 7, 8, 9, 'J', 2, 9, 2, 8]
+INFO:game.KarmaV2:{'private': [], 'public': [], 'hidden': [4, 'A']}
+INFO:game.KarmaV2:Move: [4]
+INFO:game.KarmaV2:fail
