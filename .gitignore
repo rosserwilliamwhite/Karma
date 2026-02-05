@@ -1,3 +1,8 @@
-helloworld.py
-
+# .venv
 /.venv
+
+# log
+*.log
+
+# pycache
+\__pycache__
