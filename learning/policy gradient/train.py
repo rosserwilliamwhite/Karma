@@ -5,8 +5,6 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
 
-data = np.zeros((105,int(1e6)))
-
 # architecture
 class Policy(nn.Module):
     def __init__(self):
@@ -15,7 +13,7 @@ class Policy(nn.Module):
 
         self.linear1 = nn.Linear(105,256)
         self.linear2 = nn.Linear(256,256)
-        self.linear3 = nn.Linear(256,104)
+        self.linear3 = nn.Linear(256,52)
         
 
     def forward(self,x: torch.Tensor):
@@ -26,17 +24,20 @@ class Policy(nn.Module):
         x = self.linear3(x)
         return x
     
-    def get_dists(self, x): 
+    def get_dist(self, x): 
         x = self.forward(x)
-        m1 = Categorical(logits=x[:52])
-        m2 = Categorical(logits=x[52:])
-        return m1, m2
+        m = Categorical(logits=x[:52])
+        return m
     
     def learn(self, logprobs: np.ndarray, rewards: np.ndarray):
+        GAMMA = 0.9
         # find avg of: - log probs * R  = loss  
 
-        # TODO ALL ACTIONS CARRY FUTURE REWARDS
-        discounted_rewards: np.ndarray
+        R = 0
+        discounted_rewards = np.zeros_like(rewards)
+        for i in range(len(rewards)):
+            R = rewards[-(i+1)] + GAMMA * R
+            discounted_rewards[-(i+1)] = R
 
         losses = - logprobs * discounted_rewards
         loss = torch.cat(losses).sum()
