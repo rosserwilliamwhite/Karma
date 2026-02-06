@@ -14,7 +14,6 @@ class Policy(nn.Module):
         self.linear1 = nn.Linear(105,256)
         self.linear2 = nn.Linear(256,256)
         self.linear3 = nn.Linear(256,52)
-        
 
     def forward(self,x: torch.Tensor):
         x = self.linear1(x)
@@ -25,11 +24,13 @@ class Policy(nn.Module):
         return x
     
     def get_dist(self, x): 
+        self.eval()
         x = self.forward(x)
         m = Categorical(logits=x[:52])
         return m
     
     def learn(self, logprobs: np.ndarray, rewards: np.ndarray):
+        self.train()
         GAMMA = 0.9
         # find avg of: - log probs * R  = loss  
 
