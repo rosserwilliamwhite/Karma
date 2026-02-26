@@ -3,22 +3,21 @@ import logging
 import torch
 import torch.nn as nn
 logger = logging.getLogger(__name__)
+from torch.distributions.categorical import Categorical
 
 class Player:
-    def __init__(self,  player_info):
+    def __init__(self, name, player_info):
         self.hand = {}
         self.hand['private'] = self.hand['public'] = self.hand['hidden'] = []
         self.hmap = ['private', 'public', 'hidden']
         self.win = False
         self.phase = 0
+        self.name = name
         self.info = player_info
+        self.rewards = []
+        self.logprobs = []
 
-        if isinstance(player_info, nn.Module):
-            self.name = 'ai' 
-        else:
-            self.name = player_info
-
-        if self.name not in ['human','bot','ai']:
+        if self.name not in ['human','bot','imitation','vpg']:
             raise Exception('Invalid input type!')
         
     def inplay(self):
@@ -70,6 +69,15 @@ class Player:
             i = [0]
         return i
     
+    def make_state(self, pile, inplay, device='cuda'):
+        x = torch.zeros(105).to(device)
+        x[0] = self.phase
+        for i, v in enumerate(pile[::-1],1):
+            x[i] = v
+        for i, v in enumerate(inplay,53):
+            x[i] = v
+        return x
+    
     def getbi(self, pile, inplay):
         logger.info(f"Pile: {[cmap[c] for c in pile]}")
         converted_hand = {k: [cmap[c] for c in v] for k, v in self.hand.items()}
@@ -81,22 +89,23 @@ class Player:
         elif self.name == 'bot':
             i = self.botmove(pile, inplay)
             return (i[0], i[-1])
-        elif self.name == 'ai':
+        elif self.name == 'imitation':
             net: nn.Module = self.info
             net.eval()
-            device = next(net.parameters()).device
-            x = torch.zeros(105).to(device)
-            x[0] = self.phase
-            for i, v in enumerate(pile[::-1],1):
-                x[i] = v
-            for i, v in enumerate(inplay,53):
-                x[i] = v
+            x = self.make_state(pile, inplay, next(net.parameters()).device)
             y = net(x)
             bi = [int(v.item()) for v in y]
             return tuple(bi)
+        elif self.name == 'vpg':
+            policy = self.info
+            x = self.make_state(pile, inplay)
+            bi, probs = policy.get_bi(x)
+            self.logprobs.append(probs)
+            return (int(bi[0].item()), int(bi[1].item()))
+            
 
 class Karma:
-    def __init__(self, info: tuple = ('bot','bot')):
+    def __init__(self, info: dict = {'bot':None,'bot':None}):
         card_range = list(range(1, 14))
         self.pack = card_range * 4
         random.shuffle(self.pack)  # repeat 0-12 4 times
@@ -114,10 +123,10 @@ class Karma:
         cmap_inv = {v: k for k, v in cmap.items()}
         self.index = dict(zip(ranks, card_range))
 
-    def deal(self, info):
+    def deal(self, info: dict):
         self.players = []
-        for i, name in enumerate(info):
-            player = Player(name)
+        for i, name in enumerate(info.keys()):
+            player = Player(name, info[name])
             player.hand['hidden'] = self.draw[i * 9 : i * 9 + 3]
             shown = self.draw[i * 9 + 3 : i * 9 + 9]
             shown.sort()
@@ -167,6 +176,7 @@ class Karma:
             logger.info(f"Player{self.whosturn} ({player.name}) won!")
 
     def referee(self, player: Player, bi: tuple) -> int:
+        # TODO add rewards 
         inplay = player.hand[player.hmap[player.phase]]
         self.data['phase'] = (player.phase,)
         self.data['inplay'] = tuple(player.inplay().copy())
@@ -182,6 +192,7 @@ class Karma:
         logger.info(outcome)
         # do the control
         if outcome == "fail":
+            player.rewards[-1] += -1
             del inplay[bi[0] : bi[1]+1]
             player.hand['private'] += self.pile + move
             self.pile = []
@@ -198,10 +209,12 @@ class Karma:
 
     def turn(self):
         player: Player = self.getplayer()
+        player.rewards.append(0)
         inplay = player.inplay()
         logger.info(f"Player{self.whosturn} ({player.name})  (phase {player.phase}) TURN:")
         bi = player.getbi(self.pile, inplay)
         self.referee(player, bi)
+        player.rewards[-1] += int(self.win)
 
     # Game control
     def run(self):
@@ -210,7 +223,8 @@ class Karma:
             self.nextplayer()
 
 if __name__ == "__main__":
-    info = ('bot','bot')
+    logging.basicConfig(filename='game/run.log', level=logging.INFO, filemode='w')
+    info = {'bot':None,'bot':None}
     for i in range(100):
         game = Karma(info)
         game.run()
